@@ -1,6 +1,8 @@
 # BSALE STORE WEB
 Web creada para oportunidad BSALE
 
+* PAGINA HEROKU: https://bsale-store-page.herokuapp.com
+
 # Informacion
 Esta web se encarga de filtrar segun categoria cada uno de los productos encontrados en la base de datos, de todas formas, en su estado base esta mostrará todos los productos listados.
 
