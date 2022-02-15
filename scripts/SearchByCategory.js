@@ -2,34 +2,45 @@ function SearchByCategory(id){
 
     const url = "https://store-bsale-app.herokuapp.com";
 
-    const product = document.getElementById("product");
-    if (product){
-        product.remove();
-    } else {
-        const divProduct = document.createElement("div");
-        divProduct.setAttribute("id", "sub-product");
-    }
-        const ProductResponse = document.querySelector("#sub-product");
+    var product = document.getElementById("product");
+    var sub_product = document.getElementById("sub-product");
 
-        const table = document.createElement("table");
-        const tbody = document.createElement("tbody");
+    if (product.style.display === "block"){
+        product.style.display = "none";
+    } else {
+        if (sub_product.style.display === "none"){
+            sub_product.style.display = "block";
+        } else {
+            sub_product.style.display = "none";
+        }
+    }
+        var ProductResponse = document.querySelector("#sub-product");
 
         fetch(`${url}/store/list/${id}`)
         .then((response) => response.json())
         .then((products)=> {
-            products.forEach((product) => {
-                let row = document.createElement("tr");
-                let column = document.createElement("td");
-                let image = document.createElement("img");
 
-                let price = [(`${product.discount}`/ 100 * `${product.price}`)-(`${product.price}`)]*-1;
+            var table = document.createElement("table");
+            table.setAttribute("id","product-table");
+            var pTable = document.getElementById("product-table");
+            if (pTable){
+                pTable.remove();
+            }
+            var tbody = document.createElement("tbody");
+
+            products.forEach((product) => {
+                var row = document.createElement("tr");
+                var column = document.createElement("td");
+                var image = document.createElement("img");
+
+                const price = [(`${product.discount}`/ 100 * `${product.price}`)-(`${product.price}`)]*-1;
 
                 image.setAttribute("src",`${product.url_image}`);
                 image.setAttribute("alt", `${product.name}`);
                 image.setAttribute("id", `product-img`);
         
-                let text = document.createTextNode(`${product.name}`)
-                let textPrice = document.createTextNode(`${price}`); 
+                var text = document.createTextNode(`${product.name}`)
+                var textPrice = document.createTextNode(`${price}`); 
 
                 column.appendChild(image);
                 column.appendChild(textPrice);
@@ -39,6 +50,11 @@ function SearchByCategory(id){
 
                 tbody.appendChild(row);
             });
+
+
+
+            product.style.display = "none";
+            sub_product.style.display = "block";
 
             table.appendChild(tbody);
 
